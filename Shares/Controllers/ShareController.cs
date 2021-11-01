@@ -19,7 +19,7 @@ namespace Shares.Controllers
 
         }
 
-        [HttpGet(Name = "get")]
+        [HttpGet]
         public List<Stock> Get()
         {
             return ShareRepository.GetAllShares();
@@ -31,6 +31,34 @@ namespace Shares.Controllers
             shareRepository.InsertTheShare(postShare);
 
             return postShare;
+        }
+
+        [HttpDelete("{shareId}")]
+        public List<Stock> Delete(int shareId)
+        { ShareRepository shareRepository = new ShareRepository();
+            shareRepository.DeleteShare(shareId);
+
+            return Get();
+        }
+
+
+         [HttpPut("{shareId}")]
+          public string Put(int shareId, [FromBody] PostShare postShare)
+          {
+            ShareRepository shareRepository = new ShareRepository();
+            shareRepository.UpdateShare(shareId, postShare);
+
+              return "Updated share ID: " + shareId + " with " + postShare.stocks + " stocks";
+
+          }
+        [HttpPut("UpdateValue/{shareId}")]
+        public string putValue(int shareId, [FromBody] PostShare postShare)
+        {
+            ShareRepository shareRepository = new ShareRepository();
+            shareRepository.UpdateShareValue(shareId, postShare);
+
+            return "Updated share ID: " + shareId + " with " + postShare.boughtPrice + " value";
+
         }
     }
 }

@@ -90,5 +90,51 @@ namespace Shares.Repository
             command.ExecuteNonQuery();
             con.Close();
         }
+        public void UpdateShare(int shareId, PostShare postShare)
+        {
+            SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
+            con.Open();
+            string sql = "UPDATE Share SET stocks=@stocks, date=@date WHERE shareid = @shareid";
+            SqliteCommand command = new SqliteCommand(sql, con);
+
+            command.Parameters.AddWithValue("@shareid", shareId);
+            command.Parameters.AddWithValue("@stocks", postShare.stocks);
+            command.Parameters.AddWithValue("@date", DateTime.Now);
+
+            command.Prepare();
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+        public void UpdateShareValue(int shareId, PostShare postShare)
+        {
+            SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
+            con.Open();
+            string sql = "UPDATE Share SET boughtPrice=@boughtPrice, date=@date WHERE shareid = @shareid";
+            SqliteCommand command = new SqliteCommand(sql, con);
+
+            command.Parameters.AddWithValue("@shareid", shareId);
+            command.Parameters.AddWithValue("@boughtPrice", postShare.boughtPrice);
+            command.Parameters.AddWithValue("@date", DateTime.Now);
+
+            command.Prepare();
+            command.ExecuteNonQuery();
+            con.Close();
+        }
+
+        public void DeleteShare(int shareid)
+        {
+            SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
+            con.Open();
+            string sql = "DELETE FROM Share WHERE shareid = @shareid";
+            SqliteCommand command = new SqliteCommand(sql, con);
+            command.Parameters.AddWithValue("@shareid", shareid);
+
+            SqliteDataReader reader = command.ExecuteReader();
+
+            reader.Close();
+            con.Close();
+            con.Dispose();
+
+        }
     }
 }
