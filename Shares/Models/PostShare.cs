@@ -7,5 +7,6 @@
         public double boughtPrice { get; set; }
         public double stocks { get; set; }
         public int userid { get; set; }
+
     }
 }

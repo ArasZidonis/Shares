@@ -9,6 +9,8 @@
         public double stocks  { get; set; }
         public DateTime date { get; set; }
         public int userid { get; set; }
+        public double boughtValue { get; set; }
         public double actualValue { get; set; }
+        public double profit { get; set; }
     }
 }

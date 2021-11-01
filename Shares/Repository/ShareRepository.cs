@@ -10,26 +10,6 @@ namespace Shares.Repository
     {
         
         // Stocks stocks = new Stocks();
-        public static double GetTest()
-        {
-            double ok;
-            // List<Global_Quote> share = new List<Global_Quote>();
-
-            using (var webClient = new System.Net.WebClient())
-            {
-                var json = webClient.DownloadString("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=IBM&apikey=BP0AVHFI85Y2G129");
-                var data = JsonConvert.DeserializeObject<Global_Quote>(json);
-             
-               
-                ok = data.globalQuote.price;
-            }
-            //stocks = new Stocks();
-           // stocks.Price = actualValue;
-            
-            return ok;
-
-        }
-
         public static List<Stock> GetAllShares()
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -63,6 +43,10 @@ namespace Shares.Repository
                 stock.stocks = reader.GetDouble(reader.GetOrdinal("stocks"));
                 stock.date = reader.GetDateTime(reader.GetOrdinal("date"));
                 stock.userid = reader.GetInt32(reader.GetOrdinal("userid"));
+                stock.boughtValue = stock.boughtPrice * stock.stocks;
+                stock.actualValue = stock.actualValue * stock.stocks;
+                stock.profit = stock.boughtValue - stock.actualValue;
+
                 allStocks.Add(stock);
             }
             reader.Close();

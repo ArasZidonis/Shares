@@ -11,14 +11,6 @@ namespace Shares.Controllers
     {
         //  ShareController shareRepository = new ShareController();
 
-
-        [HttpGet("~/test")]
-        public double GetTest()
-        {
-            return ShareRepository.GetTest();
-
-        }
-
         [HttpGet]
         public List<Stock> GetAllShares()
         {
