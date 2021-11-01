@@ -12,7 +12,7 @@ namespace Shares.Controllers
 
 
         [HttpGet]
-        public List<User> Get()
+        public List<User> GetAllUsers()
         {
             return UserRepository.GetAllUsers();
         }
@@ -34,11 +34,11 @@ namespace Shares.Controllers
         }
 
         [HttpDelete("{userid}")]
-        public List<User> Delete(int userid)
+        public List<User> DeleteUser(int userid)
         {
             repository.DeleteUser(userid);
 
-            return Get();
+            return GetAllUsers();
         }
     }
 }

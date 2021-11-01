@@ -20,7 +20,7 @@ namespace Shares.Controllers
         }
 
         [HttpGet]
-        public List<Stock> Get()
+        public List<Stock> GetAllShares()
         {
             return ShareRepository.GetAllShares();
         }
@@ -38,12 +38,12 @@ namespace Shares.Controllers
         { ShareRepository shareRepository = new ShareRepository();
             shareRepository.DeleteShare(shareId);
 
-            return Get();
+            return GetAllShares();
         }
 
 
          [HttpPut("{shareId}")]
-          public string Put(int shareId, [FromBody] PostShare postShare)
+          public string PutStocks(int shareId, [FromBody] PostShare postShare)
           {
             ShareRepository shareRepository = new ShareRepository();
             shareRepository.UpdateShare(shareId, postShare);
