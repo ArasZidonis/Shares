@@ -5,11 +5,17 @@ using Shares.Models;
 using Microsoft.Data.Sqlite;
 
 namespace Shares.Repository
-{
+
+{    /// <summary>
+     /// CryptoRepository is used for all actions that contain Shares.
+     /// </summary>
     public class ShareRepository
     {
-        
-        // Stocks stocks = new Stocks();
+
+        /// <summary>
+        /// Method used to get all stocks from the database.
+        /// </summary>
+        /// <returns>Returns a list of all Stocks</returns>
         public static List<Stock> GetAllShares()
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -55,6 +61,11 @@ namespace Shares.Repository
 
             return allStocks;
         }
+
+        /// <summary>
+        /// Method used to add a new stock to the database.
+        /// </summary>
+        /// <param name="postShare">new crypto object which will be added to the database</param>
         public void InsertTheShare(PostShare postShare)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -74,6 +85,11 @@ namespace Shares.Repository
             command.ExecuteNonQuery();
             con.Close();
         }
+        /// <summary>
+        /// Method to update an existing stock in the database.
+        /// </summary>
+        /// <param name="shareId">id of the stock which will be updated</param>
+        /// <param name="postShare">stock object with all required information for the stock update</param>
         public void UpdateShare(int shareId, PostShare postShare)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -89,6 +105,11 @@ namespace Shares.Repository
             command.ExecuteNonQuery();
             con.Close();
         }
+        /// <summary>
+        /// Method to update an existing stock in the database.
+        /// </summary>
+        /// <param name="shareId">id of the stock which will be updated</param>
+        /// <param name="postShare">stock object with all required information in order to  update value of the stock</param>
         public void UpdateShareValue(int shareId, PostShare postShare)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -105,6 +126,10 @@ namespace Shares.Repository
             con.Close();
         }
 
+        /// <summary>
+        /// Method to delete a stock from the database using it's id.
+        /// </summary>
+        /// <param name="shareid">id of the stock which will be removed</param>
         public void DeleteShare(int shareid)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");

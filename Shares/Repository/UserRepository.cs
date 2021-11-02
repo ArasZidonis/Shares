@@ -8,8 +8,15 @@ using Shares.Models;
 
 namespace Shares.Repository
 {
+    /// <summary>
+    /// UsersRepository class is used for all actions with users.
+    /// </summary>
     public class UserRepository
     {
+        /// <summary>
+        /// Method to get all users from the database.
+        /// </summary>
+        /// <returns>Returns list of all users</returns>
         public static List<User> GetAllUsers()
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -38,6 +45,11 @@ namespace Shares.Repository
             return allUsers;
         }
 
+        /// <summary>
+        /// Method to get user by his id.
+        /// </summary>
+        /// <param name="userid">id of the specified user</param>
+        /// <returns>Returns the selected user</returns>
         public static List<User> GetUserByID(int userid)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -67,6 +79,11 @@ namespace Shares.Repository
             return allUsers;
         }
 
+        /// <summary>
+        /// Method to add new user to the database.
+        /// </summary>
+        /// <param name="newUser">New user object with all information that will be added</param>
+
         public void AddNewUser(User newUser)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
@@ -85,6 +102,11 @@ namespace Shares.Repository
             command.ExecuteNonQuery();
             con.Close();
         }
+
+        /// <summary>
+        /// Method to delete a user from the database by his id.
+        /// </summary>
+        /// <param name="userid">id of the user which will be deleted</param>
         public void DeleteUser(int userid)
         {
             SqliteConnection con = new SqliteConnection(@"Data Source=Shares.db");
